@@ -1,6 +1,6 @@
 import pickle
 import tensorflow as tf
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+from keras.utils import pad_sequences
 
 
 def load_saved_model_and_tokenizer(model_path, tokenizer_path):
@@ -30,7 +30,9 @@ def main():
     model, tokenizer = load_saved_model_and_tokenizer(model_path, tokenizer_path)
 
     while True:
-        user_input = input("Enter a review or type 'quit' to exit: ")
+        user_input = input(
+            "Enter the text you want to analyze the sentiment of. Type 'quit' to exit: "
+        )
 
         if user_input.lower() == "quit":
             break

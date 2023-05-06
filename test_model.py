@@ -1,14 +1,13 @@
 import os
 import pandas as pd
-import numpy as np
 import pickle
 from sklearn.metrics import classification_report, accuracy_score
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf
+from keras.utils import pad_sequences
 from sklearn.preprocessing import LabelEncoder
 
 
-def load_saved_model_and_tokenizer(model_path, tokenizer_path):
+def load_saved_model(model_path, tokenizer_path):
     model = tf.keras.models.load_model(model_path)
     with open(tokenizer_path, "rb") as f:
         tokenizer = pickle.load(f)
@@ -44,7 +43,7 @@ def main():
     tokenizer_path = "tokenizer.pickle"
     max_len = 100
 
-    model, tokenizer = load_saved_model_and_tokenizer(model_path, tokenizer_path)
+    model, tokenizer = load_saved_model(model_path, tokenizer_path)
 
     restaurants, steam = load_data()
     X_test, y_test = preprocess_data(restaurants, tokenizer, max_len)
