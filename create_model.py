@@ -40,13 +40,6 @@ def load_data():
     financial.columns = ["review", "sentiment"]
     data.append(financial)
 
-    restaurants = pd.read_csv(os.path.join("data", "restaurants.csv"))
-    restaurants = restaurants[["review", "sentiment"]]
-    restaurants["sentiment"] = restaurants["sentiment"].replace(
-        {0: "negative", 1: "positive"}
-    )
-    data.append(restaurants)
-
     # turns the data list into a pandas dataframe and drops the rows that have missing columns
     all_data = pd.concat(data, axis=0, ignore_index=True)
     all_data = all_data.dropna(subset=["review"])
@@ -111,7 +104,7 @@ def main():
     max_len = 100
     test_size = 0.2
     batch_size = 64
-    epochs = 5
+    epochs = 2
 
     padded_sequences, labels, tokenizer, _ = preprocess_data(data, max_len)
 
